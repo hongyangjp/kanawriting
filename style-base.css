@@ -1,0 +1,277 @@
+/* style-base.css */
+@import url('https://fonts.googleapis.com/css2?family=Iansui&family=Klee+One&display=swap');
+
+:root {
+    --primary-color: #4a90e2;    
+    --bg-color: #f5f7fa;         
+    --card-bg: #ffffff;          
+    --text-color: #333333;       
+    --accent-color: #2ecc71;     
+    --toggle-color: #9b59b6;     
+}
+
+body {
+    font-family: 'Klee One', 'Iansui', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    margin: 0;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    touch-action: manipulation; 
+}
+
+h1 {
+    color: var(--primary-color);
+    margin: 10px 0;
+    font-size: 1.6rem;
+    text-align: center;
+}
+
+.tabs {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px;
+    margin-bottom: 12px;
+}
+
+.tab-btn {
+    font-family: 'Klee One', sans-serif;
+    font-size: 0.95rem;
+    padding: 6px 14px;
+    cursor: pointer;
+    border: 2px solid var(--primary-color);
+    background: transparent;
+    color: var(--primary-color);
+    border-radius: 20px;
+    transition: all 0.3s ease;
+}
+
+.tab-btn.active {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.mode-toggle-container {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    width: 100%;
+    max-width: 600px;
+}
+
+.toggle-btn {
+    font-family: 'Klee One', sans-serif;
+    font-size: 1rem;
+    padding: 8px 24px;
+    border: 2px solid var(--toggle-color);
+    background: transparent;
+    color: var(--toggle-color);
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.toggle-btn.active {
+    background: var(--toggle-color);
+    color: #ffffff;
+}
+
+.selection-container {
+    width: 100%;
+    max-width: 600px;
+    margin-bottom: 20px;
+    display: block; /* デフォルトPC表示 */
+}
+
+.chart-container {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    gap: 6px;
+    direction: rtl;
+}
+
+.chart-container.dakuon-grid {
+    grid-template-columns: repeat(5, 1fr);
+}
+
+.kana-btn, .word-btn {
+    font-family: 'Klee One', sans-serif;
+    background: var(--card-bg);
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    transition: all 0.2s ease;
+}
+
+.kana-btn {
+    font-size: 1.15rem;
+    font-weight: 600;
+    padding: 12px 0;
+    direction: ltr; 
+}
+
+.kana-btn:hover, .word-btn:hover {
+    background-color: #eef5fc;
+    border-color: var(--primary-color);
+}
+
+.kana-btn.selected, .word-btn.selected {
+    background-color: var(--primary-color) !important;
+    color: white !important;
+    border-color: var(--primary-color) !important;
+}
+
+.kana-btn.empty {
+    visibility: hidden;
+}
+
+.word-list-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 15px;
+    background: #fff;
+    border-radius: 12px;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+}
+
+.add-word-box {
+    background: #f8fafc;
+    border: 1px dashed #cbd5e1;
+    padding: 12px;
+    border-radius: 8px;
+}
+
+.add-word-box h3 {
+    margin: 0 0 10px 0;
+    font-size: 0.95rem;
+    color: #475569;
+}
+
+.input-group {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.input-group input {
+    font-family: 'Klee One', sans-serif;
+    flex: 1;
+    min-width: 130px;
+    padding: 8px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    outline: none;
+}
+
+.input-group input:focus {
+    border-color: var(--primary-color);
+}
+
+#addWordBtn {
+    font-family: 'Klee One', sans-serif;
+    background: var(--accent-color);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.word-group h3 {
+    margin: 5px 0 10px 0;
+    font-size: 1rem;
+    border-left: 4px solid var(--primary-color);
+    padding-left: 8px;
+    color: #334155;
+}
+
+.word-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.word-btn {
+    font-size: 1.05rem;
+    padding: 8px 14px;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* --- スマホメニュー開閉スイッチ基礎設定 --- */
+.mobile-menu-trigger {
+    display: none; 
+    font-family: 'Klee One', sans-serif;
+    font-size: 1.1rem;
+    font-weight: bold;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 25px;
+    cursor: pointer;
+    margin: 10px 0;
+    box-shadow: 0 4px 10px rgba(74, 144, 226, 0.3);
+    width: 90%;
+    max-width: 400px;
+}
+
+.mobile-menu-close {
+    display: none;
+    font-family: 'Klee One', sans-serif;
+    font-size: 1.05rem;
+    font-weight: bold;
+    background-color: var(--accent-color); 
+    color: white;
+    border: none;
+    padding: 12px 0;
+    width: 100%;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 20px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+/* 📱 スマホビュー（幅600px以下）のレイアウト変形 */
+@media screen and (max-width: 600px) {
+    .mobile-menu-trigger {
+        display: block; 
+    }
+
+    /* 💡 優先度バグ対策：初期は確実に消し去る */
+    .selection-container {
+        display: none !important; 
+    }
+
+    /* 💡 JSでこのクラスが付与されたら最優先（!important）でフルスクリーン展開 */
+    .selection-container.mobile-show-drawer {
+        display: block !important;
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        background-color: var(--bg-color) !important; 
+        z-index: 99999 !important; 
+        padding: 20px !important;
+        box-sizing: border-box !important;
+        overflow-y: auto !important; 
+    }
+
+    .mobile-menu-close {
+        display: block; 
+    }
+}

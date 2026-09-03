@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>日本語手書き・多選PDF習字帖（なぞり書き）</title>
+	<script src="unpkg.com/animikana@1.1.2/dist/animikana.min.js"></script>
+    <link rel="stylesheet" href="style-base.css">
+    <link rel="stylesheet" href="style-practice.css">
+</head>
+<body>
+
+    <h1>日本語手書き・多選PDF習字帖</h1>
+
+    <!-- 💡 スマホ用：文字選択メニューを開くボタン -->
+    <button id="mobileOpenMenuBtn" class="mobile-menu-trigger no-print">🔍 文字・単語を選択する</button>
+
+    <!-- 第1層：分類タブ -->
+    <div class="tabs no-print">
+        <button id="tabHiragana" class="tab-btn">ひらがな</button>
+        <button id="tabKatakana" class="tab-btn">カタカナ</button>
+        <button id="tabDakuon" class="tab-btn">濁音・半濁音</button>
+        <button id="tabYoon" class="tab-btn">拗音</button> 
+        <button id="tabWords" class="tab-btn">単語・語彙</button>
+    </div>
+
+    <!-- 第2層：画面臨摹 / PDF 出力 切り替え -->
+    <div class="mode-toggle-container no-print">
+        <button id="viewTraceBtn" class="toggle-btn active">📱 画面でなぞり書き</button>
+        <button id="viewPrintBtn" class="toggle-btn">🖨️ PDF・印刷出力</button>
+    </div>
+
+    <!-- 文字・単語の選択コンテナ -->
+    <div class="selection-container no-print" id="selectionContainer">
+        <!-- 五十音・濁音・拗音図の動的描画エリア -->
+        <div id="chart" class="chart-container"></div>
+
+        <!-- 単語・語彙選択エリア -->
+        <div id="wordListSection" class="word-list-container hidden">
+            <div class="add-word-box">
+                <h3>✨ オリジナル単語を追加する</h3>
+                <div class="input-group">
+                    <input type="text" id="newWordText" placeholder="単語（例：さくら）">
+                    <input type="text" id="newWordMeaning" placeholder="意味（例：桜）">
+                    <button id="addWordBtn">追加</button>
+                </div>
+            </div>
+
+            <div class="word-group">
+                <h3>基本の単語</h3>
+                <div id="defaultWordList" class="word-buttons"></div>
+            </div>
+
+            <div class="word-group" style="margin-top: 15px;">
+                <h3>追加した単語</h3>
+                <div id="customWordList" class="word-buttons"></div>
+            </div>
+        </div>
+        
+        <!-- 💡 スマホ用：ドロワーを閉じるボタン -->
+        <button id="mobileCloseMenuBtn" class="mobile-menu-close no-print">✨ 選択を確定して練習を始める</button>
+    </div>
+
+    <!-- 練習・印刷エリア -->
+    <div id="practiceArea" class="practice-area">
+        <div class="practice-header no-print">
+            <h2 id="practiceLabel">練習ボード</h2>
+            <div class="controls">
+                <button id="clearBtn" class="clear-btn">🧹 書いた線を消す</button>
+                <button id="printActionBtn" class="print-action-btn hidden">🖨️ このページを印刷する (A4)</button>
+            </div>
+        </div>
+
+        <div class="workspace-wrapper">
+            <div id="canvasWorkspace" class="canvas-workspace"></div>
+        </div>
+    </div>
+
+    <!-- JavaScript のロード順序（超重要） -->
+    <script src="data.js"></script>
+    <script src="canvas.js"></script>
+    <script src="ui-core.js"></script>
+    <script src="ui-render.js"></script>
+</body>
+</html>

@@ -1,0 +1,330 @@
+/* style-practice.css */
+.practice-area {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 95%;
+    box-sizing: border-box;
+}
+
+.practice-area.active {
+    display: flex;
+}
+
+.practice-header {
+    width: 100%;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+#practiceLabel {
+    margin: 0 0 10px 0;
+    font-size: 1.3rem;
+}
+
+.controls {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #f0f4f8;
+    padding: 6px 12px;
+    border-radius: 8px;
+}
+
+.workspace-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 10px 0;
+}
+
+.canvas-workspace {
+    display: flex;
+    flex-wrap: wrap; 
+    gap: 15px; 
+    justify-content: center;
+    width: 100%;
+}
+
+.canvas-workspace.print-view-mode {
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+}
+
+.word-row-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+    width: 100%;
+}
+
+/* 画面上の印刷プレビュー容器 */
+.canvas-workspace.print-view-mode .word-row-container {
+    flex-wrap: nowrap !important;
+    justify-content: space-between !important; 
+    gap: 0px !important; 
+    max-width: 794px; 
+    width: 100%;
+}
+
+.yoon-pair-block {
+    display: flex !important;
+    flex-direction: row !important; 
+    flex-wrap: nowrap !important;   
+    gap: 0px !important;            
+}
+
+.canvas-workspace.print-view-mode .word-row-container.has-yoon-gap .yoon-pair-block:not(:last-child) {
+    margin-right: 25px !important;
+}
+
+.canvas-container {
+    position: relative;
+    background-color: #fffdf9;
+    border: 2px dashed #999;
+    border-radius: 4px;
+    overflow: hidden;
+    flex-shrink: 0;
+    box-sizing: border-box;
+    container-type: inline-size; 
+}
+
+/* 十字点線 */
+.canvas-container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 0;
+    height: 100%;
+    border-left: 1px dashed #cbd5e1;
+    z-index: 1;
+    pointer-events: none;
+}
+.canvas-container::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 0;
+    border-top: 1px dashed #cbd5e1;
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* 斜め対角点線 */
+.diagonal-lines {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+}
+.diagonal-line-1, .diagonal-line-2 {
+    position: absolute;
+    width: 141.42%; 
+    height: 0;
+    border-top: 1px dashed #e2e8f0;
+    top: 0;
+    transform-origin: top left;
+}
+.diagonal-line-1 { left: 0; transform: rotate(45deg); }
+.diagonal-line-2 { right: 0; transform-origin: top right; transform: rotate(-45deg); }
+
+/* 文字中心おさまりスタイル */
+.bg-outline-text {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-family: 'Klee One', sans-serif;
+    z-index: 2;
+    pointer-events: none;
+    user-select: none;
+    
+    line-height: 0 !important; 
+    margin: 0 !important;
+    padding: 0 !important;
+    box-sizing: border-box;
+    transform: translateY(-5%) !important; /* 💡 90%大文字の重心を微調整 */
+
+    font-size: 90cqw !important; 
+    font-weight: 400 !important; 
+    color: transparent !important; 
+    -webkit-text-stroke: 1px #b0b0b0; 
+}
+
+.bg-outline-text.small-kana {
+    align-items: flex-end;
+    justify-content: flex-start;
+    padding-left: 5%;
+    padding-bottom: 5%;
+    line-height: 1 !important; 
+    font-size: 70cqw !important; 
+    transform: none !important;
+}
+
+.bg-outline-text.dakuon-text-style {
+    font-size: 82cqw !important; 
+    transform: translateY(-5%) !important; 
+}
+
+.bg-outline-text.solid-text {
+    color: #1a1a1a !important;
+    -webkit-text-stroke: 0px transparent !important;
+    font-weight: 400 !important;
+}
+
+.bg-outline-text.print-outline-style {
+    color: transparent !important;
+    font-weight: 400 !important;
+    -webkit-text-stroke: 1px #a0a0a0 !important; 
+}
+
+.paintCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 3;
+    touch-action: none;
+    cursor: crosshair;
+}
+
+/* ==========================================================================
+   🖨️ PDF専用印刷設定スタイル（完全レスポンシブ）
+   ========================================================================== */
+@media print {
+    @page {
+        size: A4 portrait;
+        margin: 0mm !important; 
+    }
+    
+    .no-print, #chart, #wordListSection, .tabs, h1, .practice-header, .mode-toggle-container {
+        display: none !important;
+    }
+    
+    body {
+        background: #ffffff !important;
+        padding: 0 !important;
+        margin: 45px 0 0 0 !important; 
+        display: block !important;
+    }
+
+    .practice-area {
+        display: block !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        background: transparent !important;
+    }
+
+    .paintCanvas {
+        display: none !important;
+    }
+
+    .canvas-workspace {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 0 !important;
+        width: 100% !important;
+    }
+
+    .word-row-container {
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: nowrap !important; 
+        justify-content: space-between !important; 
+        align-items: center !important;
+        gap: 0px !important; 
+        width: 100vw !important;       
+        margin-top: 45px !important; 
+        margin-left: 0 !important;   
+        margin-right: 0 !important;  
+        page-break-inside: avoid;    
+    }
+
+    .yoon-pair-block {
+        display: flex !important;
+        flex-direction: row !important; 
+        flex-wrap: nowrap !important;   
+        gap: 0px !important;            
+        width: calc(((100vw - (9 * 25px)) / 10) * 2) !important; 
+        flex-shrink: 0 !important;
+    }
+
+    .word-row-container.has-yoon-gap .yoon-pair-block:not(:last-child) {
+        margin-right: 25px !important; 
+    }
+    
+    .canvas-container {
+        width: calc((100vw - (9 * 25px)) / 10) !important; 
+        height: auto !important;
+        aspect-ratio: 1 / 1 !important; 
+        background-color: #ffffff !important;
+        border: 1px solid #777777 !important; 
+        margin: 0 !important; 
+        flex-shrink: 0 !important;
+    }
+
+    .canvas-container::before { border-left: 1px solid #777777 !important; }
+    .canvas-container::after { border-top: 1px solid #777777 !important; }
+    .diagonal-lines { display: block !important; }
+    .diagonal-line-1, .diagonal-line-2 { border-top: 1px dashed #888888 !important; }
+}
+/* style-practice.css の最末尾に追加してください */
+
+/* --- 💡 筆順（書き順）アニメーション用特殊スタイル --- */
+.animikana-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2; /* 文字重心レイヤーと同じ階層に配置 */
+    pointer-events: none;
+    box-sizing: border-box;
+}
+
+/* 筆順の背景にある薄いグレーのガイドライン */
+.animikana-svg .guideline {
+    stroke: #e2e8f0 !important;
+    stroke-width: 2 !important;
+}
+
+/* アニメーションで動く赤い書き順指示線 */
+.animikana-svg .stroke {
+    stroke: #ff4d4f !important; /* 視認性の高い赤色 */
+    stroke-width: 6 !important; /* なぞりやすい太さ */
+}
+
+/* 筆順の番号（1, 2, 3...） */
+.animikana-svg .number {
+    fill: #e74c3c !important;
+    font-family: 'Klee One', sans-serif;
+    font-size: 10px !important;
+    font-weight: bold !important;
+}
+/* style-practice.css の最末尾に追加してください */
+
+.bg-outline-text.fallback-text {
+    z-index: 2 !important;
+    display: flex !important; /* アニメーションが動かない時だけ緊急表示 */
+}
